@@ -7,7 +7,7 @@ abstract class Button extends StatelessWidget {
 
   factory Button.timer() => _Timer();
 
-  factory Button.calendar() => _Calendar();
+  factory Button.journal() => _Journal();
 }
 
 class _Timer extends Button {
@@ -15,18 +15,20 @@ class _Timer extends Button {
   Widget build(BuildContext context) => Column(
         children: <Widget>[
           Image.asset('assets/images/stopwatch.png'),
-          Container(margin: T.margin, child: Text('Timer', style: T.homeText)),
+          Container(
+              margin: T.homeTextMargin,
+              child: Text('Timer', style: T.homeText)),
         ],
       );
 }
 
-class _Calendar extends Button {
+class _Journal extends Button {
   @override
   Widget build(BuildContext context) => Column(
         children: <Widget>[
           Image.asset('assets/images/agendas.png'),
           Container(
-            margin: T.margin,
+            margin: T.homeTextMargin,
             child: Text('Training journal', style: T.homeText),
           )
         ],
