@@ -10,7 +10,7 @@ class HomePhoneLayout extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[Button.timer(), Button.journal()],
+          children: <Widget>[Button.timerMenu(), Button.journalMenu()],
         ),
       ));
 }
