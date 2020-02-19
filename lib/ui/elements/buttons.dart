@@ -6,14 +6,14 @@ import 'package:time_to_fit/ui/screens/timer_menu/timer_menu_screen.dart';
 abstract class Button extends StatelessWidget {
   const Button({Key key}) : super(key: key);
 
-  factory Button.timerMenu() => _TimerMenu();
+  factory Button.timerMenu() => _TimerEntryMenu();
 
   factory Button.journalMenu() => _JournalMenu();
 
-  factory Button.timerButton(String name) => _Timer(name);
+  factory Button.timerEntry(String name) => _TimerEntry(name);
 }
 
-class _TimerMenu extends Button {
+class _TimerEntryMenu extends Button {
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
@@ -47,10 +47,10 @@ class _JournalMenu extends Button {
       ));
 }
 
-class _Timer extends Button {
+class _TimerEntry extends Button {
   final String name;
 
-  _Timer(this.name);
+  _TimerEntry(this.name);
 
   @override
   Widget build(BuildContext context) => Container(
@@ -63,7 +63,7 @@ class _Timer extends Button {
           children: <Widget>[
             Expanded(
               child: GestureDetector(
-                child: Text(name),
+                child: Text(name, style: T.timerTextStyle),
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (context) => null));

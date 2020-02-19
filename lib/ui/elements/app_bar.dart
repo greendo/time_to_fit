@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:time_to_fit/style/style.dart';
+import 'package:time_to_fit/ui/elements/tooltip.dart';
 import 'package:time_to_fit/ui/screens/home/home_screen.dart';
 
 abstract class CustomAppBar extends StatelessWidget
@@ -43,24 +44,27 @@ class _Timer extends CustomAppBar {
   Widget build(BuildContext context) => AppBar(
       elevation: 0.0,
       centerTitle: true,
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios),
-        tooltip: 'Back',
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      leading: CustomTooltip(
+          message: 'Back',
+          child: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () => Navigator.of(context).pop(),
+          )),
       title: SafeArea(
         child: Text('Timer'),
       ),
       actions: <Widget>[
-        IconButton(
-            icon: Icon(
-              Icons.home,
-            ),
-            tooltip: 'Back',
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
-            }),
+        CustomTooltip(
+          message: 'Home',
+          child: IconButton(
+              icon: Icon(
+                Icons.home,
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()));
+              }),
+        ),
       ],
       bottom: PreferredSize(
           child: Container(
