@@ -14,6 +14,11 @@ abstract class C {
 
   static const tooltipColor = Color.fromRGBO(255, 255, 255, 0.65);
   static const tooltipBackground = Color.fromRGBO(14, 14, 17, 0.65);
+
+  static const progress = timerButton;
+  static const progressBack = timerButtonSettings;
+
+  static const settingsName = timerButton;
 }
 
 abstract class T {
@@ -24,6 +29,10 @@ abstract class T {
   static const timerTextMargin = EdgeInsets.only(top: 8);
   static const timerTextPadding = EdgeInsets.only(left: 15);
   static const timerTextStyle = TextStyle(fontSize: 18);
+
+  static const settingsTextStyle = TextStyle(fontSize: 21);
+  static const settingsTextMargin = EdgeInsets.only(top: 8, bottom: 8);
+  static const settingsTextPadding = EdgeInsets.only(left: 16, top: 18);
 }
 
 abstract class W {
@@ -32,6 +41,7 @@ abstract class W {
 
 abstract class H {
   static const timerButtonSettings = 72.0;
+  static const timerSettings = 56.0;
 }
 
 abstract class B {

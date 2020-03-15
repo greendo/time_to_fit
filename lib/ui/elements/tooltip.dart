@@ -5,7 +5,10 @@ class CustomTooltip extends StatelessWidget {
   final String message;
   final Widget child;
 
-  const CustomTooltip({Key key, this.message, this.child}) : super(key: key);
+  const CustomTooltip({Key key, @required this.message, @required this.child})
+      : assert(message != null, "String message must not be null"),
+        assert(child != null, "Widget child must not be null"),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) => Tooltip(

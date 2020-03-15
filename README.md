@@ -16,3 +16,6 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 https://app.zeplin.io/project/5e4502bc678f4a0a37751dee
+
+icons:
+flutter pub pub run flutter_launcher_icons:main

@@ -3,86 +3,60 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:time_to_fit/ui/screens/timer_menu/timer_menu_screen.dart';
 
-abstract class Button extends StatelessWidget {
-  const Button({Key key}) : super(key: key);
+enum ButtonType { timerMenu, journalMenu }
 
-  factory Button.timerMenu() => _TimerEntryMenu();
+class Button extends StatelessWidget {
+  final ButtonType type;
+  final String asset;
 
-  factory Button.journalMenu() => _JournalMenu();
+  Button({Key key, @required this.type, @required this.asset})
+      : assert(type != null, "Type can't be null"),
+        assert(asset != null, "Asset can't be null"),
+        super(key: key);
 
-  factory Button.timerEntry(String name) => _TimerEntry(name);
-}
+  Button.timerMenu({Key key})
+      : type = ButtonType.timerMenu,
+        asset = "assets/images/stopwatch.png",
+        super(key: key);
 
-class _TimerEntryMenu extends Button {
-  @override
-  Widget build(BuildContext context) => GestureDetector(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TimerMenuScreen()));
-      },
-      child: Column(
-        children: <Widget>[
-          Image.asset('assets/images/stopwatch.png'),
-          Container(
-              margin: T.homeTextMargin,
-              child: Text('Timer', style: T.homeText)),
-        ],
-      ));
-}
-
-class _JournalMenu extends Button {
-  @override
-  Widget build(BuildContext context) => GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => null));
-      },
-      child: Column(
-        children: <Widget>[
-          Image.asset('assets/images/agendas.png'),
-          Container(
-            margin: T.homeTextMargin,
-            child: Text('Training journal', style: T.homeText),
-          )
-        ],
-      ));
-}
-
-class _TimerEntry extends Button {
-  final String name;
-
-  _TimerEntry(this.name);
+  Button.journalMenu({Key key})
+      : type = ButtonType.journalMenu,
+        asset = "assets/images/stopwatch.png",
+        super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
-        height: H.timerButtonSettings,
-        margin: T.timerTextMargin,
-        padding: T.timerTextPadding,
-        color: C.timerButton,
-        child: Row(
-//          crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget build(BuildContext context) {
+    //TODO: read all translated strings from local json later
+    String text;
+    if (type == ButtonType.timerMenu) {
+      text = "Timer";
+    } else if (type == ButtonType.journalMenu) {
+      text = "Training journal";
+    }
+
+    return GestureDetector(
+        onTap: _navigate(context),
+        child: Column(
           children: <Widget>[
-            Expanded(
-              child: GestureDetector(
-                child: Text(name, style: T.timerTextStyle),
-                onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => null));
-                },
-              ),
-            ),
-            GestureDetector(
-              child: Container(
-                height: H.timerButtonSettings,
-                width: W.timerButtonSettings,
-                color: C.timerButtonSettings,
-                child: Icon(Icons.settings),
-              ),
-              onTap: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => null));
-              },
-            )
+            Image.asset(asset),
+            Container(
+                margin: T.homeTextMargin, child: Text(text, style: T.homeText)),
           ],
-        ),
-      );
+        ));
+  }
+
+  Function _navigate(BuildContext context) {
+    Widget w;
+    switch (type) {
+      case ButtonType.timerMenu:
+        w = TimerMenuScreen();
+        break;
+      case ButtonType.journalMenu:
+        w = null;
+    }
+
+    return () {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => w));
+    };
+  }
 }

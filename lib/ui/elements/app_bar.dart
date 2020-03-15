@@ -4,18 +4,29 @@ import 'package:time_to_fit/style/style.dart';
 import 'package:time_to_fit/ui/elements/tooltip.dart';
 import 'package:time_to_fit/ui/screens/home/home_screen.dart';
 
-abstract class CustomAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  const CustomAppBar({Key key}) : super(key: key);
+enum AppBarType { home, timer }
 
-  factory CustomAppBar.home() => _Home();
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final AppBarType type;
 
-  factory CustomAppBar.timer() => _Timer();
-}
+  CustomAppBar({Key key, @required this.type})
+      : assert(type != null, "Type can't be null"),
+        super(key: key);
 
-class _Home extends CustomAppBar {
+  CustomAppBar.home({Key key})
+      : type = AppBarType.home,
+        super(key: key);
+
+  CustomAppBar.timer({
+    Key key,
+  })  : type = AppBarType.timer,
+        super(key: key);
+
   @override
-  Widget build(BuildContext context) => AppBar(
+  Widget build(BuildContext context) =>
+      type == AppBarType.home ? _home() : _timer(context);
+
+  Widget _home() => AppBar(
       elevation: 0.0,
       centerTitle: true,
       title: SafeArea(
@@ -35,13 +46,7 @@ class _Home extends CustomAppBar {
           ),
           preferredSize: preferredSize));
 
-  @override
-  final Size preferredSize = const Size.fromHeight(kToolbarHeight);
-}
-
-class _Timer extends CustomAppBar {
-  @override
-  Widget build(BuildContext context) => AppBar(
+  Widget _timer(BuildContext context) => AppBar(
       elevation: 0.0,
       centerTitle: true,
       leading: CustomTooltip(
