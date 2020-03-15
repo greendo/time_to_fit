@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../timer_menu/timer_menu_screen.dart';
 
-
 class HomePhoneLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -37,4 +36,3 @@ class HomePhoneLayout extends StatelessWidget {
         ),
       ));
 }
-
